@@ -4,8 +4,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Re-Analysis Discussion"
+    - text: "R Basics"
       href: Journal.html
-    - text: "Reproducing ANOVA Analysis"
+    - text: "Reproducible Statistical Analysis"
       href: Links.html
 output_dir: "docs"
