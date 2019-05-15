@@ -4,8 +4,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Journal"
+    - text: "Re-Analysis Discussion"
       href: Journal.html
-    - text: "Links"
+    - text: "Reproducing ANOVA Analysis"
       href: Links.html
 output_dir: "docs"

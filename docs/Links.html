@@ -11,7 +11,7 @@
 
 
 
-<title>Resources</title>
+<title>Reproducing ANOVA Analysis</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -287,10 +287,10 @@ $(document).ready(function () {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="Journal.html">Journal</a>
+  <a href="Journal.html">Re-Analysis Discussion</a>
 </li>
 <li>
-  <a href="Links.html">Links</a>
+  <a href="Links.html">Reproducing ANOVA Analysis</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -304,26 +304,91 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Resources</h1>
+<h1 class="title toc-ignore">Reproducing ANOVA Analysis</h1>
 
 </div>
 
 
 <div id="r-and-r-studio" class="section level3">
 <h3>R and R-Studio</h3>
-<p><a href="http://www.r-project.org">R</a> is a free open-source programming language that can be used for statistical analysis, data-simulation, graphing, and lots of other stuff. Another free program is <a href="http://www.rstudio.com">R-studio</a>, that provides a nice graphic interface for R. Download R first, then download R-studio. Both can run on PCs, Macs or Linux. Students will be learning R in the stats labs using the lab manual <a href=""></a>.</p>
-</div>
-<div id="additional-r-resources" class="section level3">
-<h3>Additional R resources</h3>
-<ol style="list-style-type: decimal">
-<li>Google is great, Google your problem</li>
-<li><a href="https://stackoverflow.com">Stackoverflow</a> is great, google will often take you there because someone has already asked your question, and someone else has answered, usually many people have answered your question many ways.</li>
-<li>Danielle Navarro wrote a <a href="https://compcogscisydney.org/learning-statistics-with-r/">free Psych Stats textbook using R</a>, it’s worth checking out (some of our textbook are based on Danielle’s)</li>
-<li>I am currently writing another stats textbook (incorporating some of the above). You can read it while it’s being made right here <a href="https://crumplab.github.io/statistics/">https://crumplab.github.io/statistics/</a>, also check out the lab manual for more specific things about doing various stats in R (also in draft right now) <a href="https://crumplab.github.io/statisticsLab/">https://crumplab.github.io/statisticsLab/</a></li>
-<li>Daniell Navarro recently made this website for introducing R, it’s great, check it out (also made using this R markdown process): <a href="http://compcogscisydney.org/psyr/">http://compcogscisydney.org/psyr/</a></li>
-<li>Check out my slightly older programming book that also introduces R <a href="https://crumplab.github.io/programmingforpsych/">https://crumplab.github.io/programmingforpsych/</a></li>
-<li>This is the definitive guide for all things R Markdown (you will find this very useful as you get better at this skill): <a href="https://bookdown.org/yihui/rmarkdown/">https://bookdown.org/yihui/rmarkdown/</a></li>
-</ol>
+<pre class="r"><code>library(data.table)
+rftsample &lt;- fread(&quot;CopyOfnogo_flowheart_R.csv&quot;)</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:data.table&#39;:
+## 
+##     between, first, last</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>exclude_IDS &lt;- rftsample[is.na(rftsample$rt_go) == TRUE, ]$ID
+
+
+reaction_time &lt;- rftsample %&gt;%
+                    filter(ID %in% exclude_IDS == FALSE) %&gt;%
+                    group_by(group,Time) %&gt;%
+                    summarise(reaction_time = mean(rt_go))
+
+library(ggplot2)</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang</code></pre>
+<pre class="r"><code>ggplot(reaction_time, aes(x=group,
+                            y=reaction_time,
+                            group=Time,
+                            fill=Time))+
+  geom_bar(stat=&quot;identity&quot;,position=&quot;dodge&quot;)</code></pre>
+<p><img src="Links_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>anova_data &lt;- rftsample %&gt;%
+                    filter(ID %in% exclude_IDS == FALSE) %&gt;%
+                    mutate(ID = as.factor(ID),
+                           group = as.factor(group),
+                           Time = as.factor(Time))
+
+aov.out &lt;- aov(rt_go ~ group*Time + Error(ID/Time), anova_data)
+summary(aov.out)</code></pre>
+<pre><code>## 
+## Error: ID
+##           Df  Sum Sq Mean Sq F value Pr(&gt;F)
+## group      1   22842   22842   1.016  0.318
+## Residuals 56 1258643   22476               
+## 
+## Error: ID:Time
+##            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Time        1  69146   69146   12.53 0.000813 ***
+## group:Time  1   1489    1489    0.27 0.605386    
+## Residuals  56 308934    5517                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>print(model.tables(aov.out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##        
+## 792.67 
+## 
+##  group 
+##         2     3
+##     811.3 782.1
+## rep  42.0  74.0
+## 
+##  Time 
+##         1     2
+##     817.1 768.3
+## rep  58.0  58.0
+## 
+##  group:Time 
+##      Time
+## group 1     2    
+##   2   840.5 782.1
+##   rep  21.0  21.0
+##   3   803.8 760.4
+##   rep  37.0  37.0</code></pre>
 </div>
 
 
