@@ -1,6 +1,6 @@
 name: "NoorProject"
 navbar:
-  title: "MyLabJournal"
+  title: "NoorProject"
   left:
     - text: "Home"
       href: index.html
