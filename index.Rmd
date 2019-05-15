@@ -19,25 +19,19 @@ output: html_document
 
 # **Noor**
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
+The paper used for this assignment was: Does One Year of Schooling Improve Children's Cognitive Control and Alter Associated Brain Activation?
 
-## How to use
+## Citation
 
-1. fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
-
-2. Blog/journal what you are doing in R, by editing the Journal.Rmd. See the [Journal page](https://crumplab.github.io/LabJournalWebsite/Journal.html) for an example of what to do to get started learning R.
-
-3. See the [links page](https://crumplab.github.io/LabJournalWebsite/Links.html) for lots of helpful links on learning R.
-
-4. Change everything to make it your own.
-
+Brod, G., Bunge, S. A., & Shing, Y. L. (2017). Does One Year of Schooling Improve Children’s Cognitive Control and Alter Associated Brain Activation? Psychological Science, 28(7), 967-978. doi:10.1177/0956797617699838
 
 </div>
 <div class="col-sm-6">
 
-### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
+### [NoorProject: Psyc 3400 Honors](https://noorproject.github.io/NoorProject/)
 
-<a href = "https://crumplab.github.io">
-![](images/logo.png)
+<a href = "https://images-na.ssl-images-amazon.com/images/I/81CQvHAdPnL._SL1500_.jpg">
+![](logo.png)
+
 </a>
 </div>
