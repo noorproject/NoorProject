@@ -20,7 +20,6 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 # in 1..100
   a<-c(1,2,3,4,5)
   a[3]<-"Fizz"
-  a
 ```
 
 
