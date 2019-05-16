@@ -28,6 +28,7 @@ for (C in 1:100) {
 
 ### Snakes and Ladders Problem
 
+
 ```{r}
 save_rolls <- c()
 for (sims in 1:1000){
