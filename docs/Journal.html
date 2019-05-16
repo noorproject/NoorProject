@@ -410,12 +410,157 @@ div.tocify {
 
 <div id="fizzbuzz-problem" class="section level3">
 <h3>FizzBuzz Problem</h3>
-<pre class="r"><code># in 1..100
-  a&lt;-c(1,2,3,4,5)
-  a[3]&lt;-&quot;Fizz&quot;</code></pre>
+<pre class="r"><code>for (C in 1:100) {
+ if (C %% 3 == 0 &amp; C %% 5 == 0) {print(&quot;FizzBuzz&quot;)}
+ else if (C %% 3 == 0) {print(&quot;Fizz&quot;)}
+ else if (C %% 5 == 0) {print(&quot;Buzz&quot;)}
+ else print(C)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] &quot;Fizz&quot;
+## [1] 4
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] 7
+## [1] 8
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] 11
+## [1] &quot;Fizz&quot;
+## [1] 13
+## [1] 14
+## [1] &quot;FizzBuzz&quot;
+## [1] 16
+## [1] 17
+## [1] &quot;Fizz&quot;
+## [1] 19
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] 22
+## [1] 23
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] 26
+## [1] &quot;Fizz&quot;
+## [1] 28
+## [1] 29
+## [1] &quot;FizzBuzz&quot;
+## [1] 31
+## [1] 32
+## [1] &quot;Fizz&quot;
+## [1] 34
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] 37
+## [1] 38
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] 41
+## [1] &quot;Fizz&quot;
+## [1] 43
+## [1] 44
+## [1] &quot;FizzBuzz&quot;
+## [1] 46
+## [1] 47
+## [1] &quot;Fizz&quot;
+## [1] 49
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] 52
+## [1] 53
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] 56
+## [1] &quot;Fizz&quot;
+## [1] 58
+## [1] 59
+## [1] &quot;FizzBuzz&quot;
+## [1] 61
+## [1] 62
+## [1] &quot;Fizz&quot;
+## [1] 64
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] 67
+## [1] 68
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] 71
+## [1] &quot;Fizz&quot;
+## [1] 73
+## [1] 74
+## [1] &quot;FizzBuzz&quot;
+## [1] 76
+## [1] 77
+## [1] &quot;Fizz&quot;
+## [1] 79
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] 82
+## [1] 83
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;
+## [1] 86
+## [1] &quot;Fizz&quot;
+## [1] 88
+## [1] 89
+## [1] &quot;FizzBuzz&quot;
+## [1] 91
+## [1] 92
+## [1] &quot;Fizz&quot;
+## [1] 94
+## [1] &quot;Buzz&quot;
+## [1] &quot;Fizz&quot;
+## [1] 97
+## [1] 98
+## [1] &quot;Fizz&quot;
+## [1] &quot;Buzz&quot;</code></pre>
 </div>
 <div id="snakes-and-ladders-problem" class="section level3">
 <h3>Snakes and Ladders Problem</h3>
+<pre class="r"><code>save_rolls &lt;- c()
+for (sims in 1:1000){
+  current_tile&lt;-1
+  number_of_rolls&lt;-0
+  while(current_tile !=25 ){
+    number_of_rolls &lt;- number_of_rolls+1
+    roll&lt;-sample(c(1,2,3,4,5,6),1)
+    prev_curr_tile &lt;- current_tile
+    current_tile &lt;-current_tile+roll
+    
+    if (current_tile &gt; 25){
+      current_tile &lt;- prev_curr_tile
+    } else {
+      current_tile &lt;- prev_curr_tile + roll
+    }
+    
+    if (current_tile == 3){
+      current_tile&lt;-11
+    } else if (current_tile == 6){
+      current_tile&lt;-17
+    } else if (current_tile == 9){
+      current_tile&lt;-18
+    } else if (current_tile == 10){
+      current_tile&lt;-12
+    } else if (current_tile == 14){
+      current_tile&lt;-4
+    } else if (current_tile == 19){
+      current_tile&lt;-8
+    } else if (current_tile == 22){
+      current_tile&lt;-20
+    } else if (current_tile == 24){
+      current_tile&lt;-16
+    } else {
+      current_tile &lt;- current_tile
+    }
+  }
+  
+  save_rolls[sims] &lt;- number_of_rolls
+}
+avg&lt;-mean(save_rolls)
+avg</code></pre>
+<pre><code>## [1] 14.207</code></pre>
 </div>
 
 

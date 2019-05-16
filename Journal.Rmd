@@ -17,10 +17,58 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ### FizzBuzz Problem
 
 ```{r}
-# in 1..100
-  a<-c(1,2,3,4,5)
-  a[3]<-"Fizz"
+for (C in 1:100) {
+ if (C %% 3 == 0 & C %% 5 == 0) {print("FizzBuzz")}
+ else if (C %% 3 == 0) {print("Fizz")}
+ else if (C %% 5 == 0) {print("Buzz")}
+ else print(C)
+}
 ```
 
 
 ### Snakes and Ladders Problem
+
+```{r}
+save_rolls <- c()
+for (sims in 1:1000){
+  current_tile<-1
+  number_of_rolls<-0
+  while(current_tile !=25 ){
+    number_of_rolls <- number_of_rolls+1
+    roll<-sample(c(1,2,3,4,5,6),1)
+    prev_curr_tile <- current_tile
+    current_tile <-current_tile+roll
+    
+    if (current_tile > 25){
+      current_tile <- prev_curr_tile
+    } else {
+      current_tile <- prev_curr_tile + roll
+    }
+    
+    if (current_tile == 3){
+      current_tile<-11
+    } else if (current_tile == 6){
+      current_tile<-17
+    } else if (current_tile == 9){
+      current_tile<-18
+    } else if (current_tile == 10){
+      current_tile<-12
+    } else if (current_tile == 14){
+      current_tile<-4
+    } else if (current_tile == 19){
+      current_tile<-8
+    } else if (current_tile == 22){
+      current_tile<-20
+    } else if (current_tile == 24){
+      current_tile<-16
+    } else {
+      current_tile <- current_tile
+    }
+  }
+  
+  save_rolls[sims] <- number_of_rolls
+}
+avg<-mean(save_rolls)
+avg
+```
+
